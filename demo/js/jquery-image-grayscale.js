@@ -48,43 +48,40 @@
 
 	$.fn.grayscaleImage = function () {
 		if (isAboveIE10()) {
-			this.each(function () {
+			this.find('img').each(function () {
 				var _this = $(this),
-				targetImg = _this.find('img'),
-				targetImgWidth = el.width(),
-				targetImgHeight = el.height();
-				targetImg.css({
+				targetImgWidth = _this.width(),
+				targetImgHeight = _this.height();
+				_this.css({
 					"position" : "absolute"
 				}).wrap("<div class='img_wrapper' style='display: inline-block'>").clone().addClass('img_grayscale ieImage').css({
 					"position" : "absolute",
 					"z-index" : "5",
 					"opacity" : "1"
-				}).insertBefore(targetImg).queue(function () {
+				}).insertBefore(_this).queue(function () {
 					var el = $(this);
-					targetImg.parent().css({
-						"width" : _width,
-						"height" : _height
+					el.parent().css({
+						"width" : targetImgWidth,
+						"height" : targetImgHeight
 					});
-					targetImg.dequeue();
-				});
-				targetImg.src = grayscaleIe(targetImg.src);
-
-				_this.on({
-					'mouseenter' : function () {
-						var originalImg = $(this).find('.img_grayscale');
-						originalImg.css('opacity', 0);
-					},
-					'mouseleave' : function () {
-						var originalImg = $(this).find('.img_grayscale');
-						originalImg.css('opacity', 1);
-					}
+					el.dequeue();
 				});
 
+				this.src = grayscaleIe(this.src);
 			});
+
+			this.on({
+				'mouseenter' : function () {
+					var originalImg = $(this).find('.img_grayscale');
+					originalImg.css('opacity', 0);
+				},
+				'mouseleave' : function () {
+					var originalImg = $(this).find('.img_grayscale');
+					originalImg.css('opacity', 1);
+				}
+			});
+
 		}
 		return this;
-
 	}
-
-}
-	(jQuery));
+}(jQuery));

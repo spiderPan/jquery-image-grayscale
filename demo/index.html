@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="uft-8">
+		<title>jQuery Plugin for Image Gray</title>
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="js/jquery-image-grayscale.js"></script>
+		<script>
+			jQuery(document).ready(function($){
+				$('.test-container').grayscaleImage();
+			});
+		</script>
+	</head>
+	
+	<body>
+		<div class="test-container">
+			<img src="image/sm.jpg">
+			<img src="image/sm.jpg">
+		</div>
+		<div class="test-container">
+			<img src="image/sm.jpg">
+		</div>
+	</body>
+</html>
